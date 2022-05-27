@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise</title>
+  <script src="./lib/Promise.js"></script>
+  <!-- <script src="./lib/Promise_calss.js"></script> -->
+</head>
+
+<body>
+  <script>
+    // const p = new Promise((resolve,reject)=>{
+    //   // resolve(1)//value
+    //   reject(2)//reason
+    //   // setTimeout(()=>{
+    //     // resolve(1)
+    //   // },100)
+    // }).then(
+    //   value=>{
+    //     console.log('onResolved1()',value)
+    //   },
+    //   reason=>{
+    //     console.log('onRejected1()',reason)
+    //     return 3
+    //   }
+    // ).then(
+    //   value=>{
+    //     console.log('onResolved2()',value)
+    //   },
+    //   reason=>{
+    //     console.log('onRejected2()',reason)
+    //   }
+    // )
+
+    // const p1 = Promise.resolve(2)
+    // // .then(val=>{
+    // //   console.log(val)
+    // // })
+    // const p2 = Promise.resolve(Promise.resolve(3))
+    // // .then(val=>{
+    // //   console.log(val)
+    // // })
+    // const p3 = Promise.resolve(Promise.reject(4))
+    // // .catch(val=>{
+    // //   console.log(val)
+    // // })
+
+    // const pAll = Promise.all([p1,p2])
+    // .then(
+    //   values=>{
+    //     console.log('all onResolved()',values)
+    //   },
+    //   reason=>{
+    //     console.log('all onRejected()',reason)
+    //   }
+    // )
+
+    // const pRace = Promise.race([p1,p2,p3])
+    // .then(
+    //   value=>{
+    //     console.log('race onResolved()',value)
+    //   },
+    //   reason=>{
+    //     console.log('race onRejected()',reason)
+    //   }
+    // )
+    
+    // 1 7 2 3 8
+    // 宏 0
+    // 微 4 ，6，5
+
+    setTimeout(() => {
+      console.log("0")
+    }, 0)
+    new Promise((resolve, reject) => {
+      console.log("1")
+      resolve()
+    }).then(() => { 
+      console.log("2")
+      new Promise((resolve, reject) => {
+        console.log("3")
+        resolve()
+      }).then(() => {
+        console.log("4")
+      }).then(() => {
+        console.log("5")
+      })
+    }).then(() => {
+      console.log("6")
+    })
+    new Promise((resolve, reject) => {
+      console.log("7")
+      resolve()
+    }).then(() => {
+      console.log("8")
+    })
+  </script>
+</body>
+
+</html>
